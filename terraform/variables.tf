@@ -120,22 +120,25 @@ variable "ccloud_cluster_generate_client_config_files" {
     description = "Set to true if you want to generate client configs with the created API keys under subfolder \"generated/client-configs\""
 }
 
-variable "bitnami_application_password" {
-    type = string
-    description = "The password for the \"bitnami\" user account as well as the postgres admin user \"postgres\""
-}
-
 variable "postgres_user_name" {
     type = string
+    default = "dbadmin"
     description = "The name of the user to provision in postgres"
 }
+
 variable "postgres_user_password" {
     type = string
     description = "The password of the user to provision in postgres"
 }
 
-variable "postgres_database" {
+variable "postgres_instance_name" {
     type = string
     default = "test"
     description = "Name of the postgres database to create"
+}
+
+variable "postgres_port" {
+    type = number
+    default = 5432
+    description = "The port to be used by the postgres instance"
 }

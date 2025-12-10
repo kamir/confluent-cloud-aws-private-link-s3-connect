@@ -22,10 +22,9 @@ data "aws_subnet" "vpc_subnet" {
   id       = each.value
 }
 
-# data "aws_availability_zone" "privatelink" {
-#   for_each = var.subnets_to_privatelink
-#   zone_id  = each.key
-# }
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 
 locals {
   bootstrap_prefix = split(".", confluent_kafka_cluster.example_aws_private_link_cluster.bootstrap_endpoint)[0]
@@ -125,15 +124,4 @@ resource "aws_route53_record" "privatelink-zonal" {
       replace(aws_vpc_endpoint.privatelink.dns_entry[0]["dns_name"], local.endpoint_prefix, "")
     )
   ]
-}
-
-resource "aws_s3_bucket" "bucket" {
-    bucket = "${local.resource_prefix}-tech-summit-2024-private-link-s3"
-
-  tags = {
-    Name        = "${local.resource_prefix}-tech-summit-2024-private-link-s3"
-  }
-  lifecycle {
-    prevent_destroy = false
-  }
 }

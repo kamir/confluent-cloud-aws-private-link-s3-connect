@@ -1,10 +1,11 @@
-#tf_last_updated = "2024-07-16T18:26:59+00:00"
+# Set the next variable to avoid updates to your resources just due to the progress of time
+#tf_last_updated = "2025-12-10T13:43:03+00:00"
 ccloud_cluster_generate_client_config_files = true
 #ccloud_cluster_region = ""
 ccloud_environment_name = "my-test-env"
 ccloud_cluster_name = "my-test-cluster"
 aws_account_id = "THE ACCOUNT ID"
 aws_vpc_id = "VPC_ID"
-postgres_admin_password = "postgres"
-postgres_user_name = "user"
+#postgres_user_name = "dbadmin"
 postgres_user_password = "password"
+
