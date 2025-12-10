@@ -14,7 +14,8 @@ locals {
         owner_fullname = var.owner_fullname!="" ? var.owner_fullname : data.external.env.result["owner_fullname"]
         owner_email = var.owner_email!="" ? var.owner_email : data.external.env.result["owner_email"]
         tf_last_updated = var.tf_last_updated!="" ? var.tf_last_updated : data.external.env.result["current_datetime"]
-        divvy_last_modified_by = var.owner_email!="" ? var.owner_email : data.external.env.result["owner_email"]
+        cflt_managed_by = "user"
+        cflt_managed_id = var.owner != "" ? var.owner : data.external.env.result["user"]
     }
     # Comment the next four lines if this project is not using Confluent Cloud
     confluent_creds = {
