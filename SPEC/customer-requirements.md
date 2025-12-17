@@ -593,6 +593,44 @@ sequenceDiagram
 ### 4.3 Network Connectivity Establishment (One-Time Per Department)
 
 ```mermaid
+sequenceDiagram
+    autonumber
+
+    participant Dept as Department
+    participant EBS as EBS Platform Team
+    participant TF as Terraform
+    participant AWS as AWS (VPC / PrivateLink / DNS)
+    participant Kafka as Kafka / WarpStream
+
+    Dept->>EBS: Request Kafka Access
+
+    EBS->>EBS: Assess Requirements
+    EBS->>EBS: Design Network Architecture
+    EBS->>TF: Create Terraform Modules
+
+    TF->>AWS: Deploy PrivateLink
+    AWS->>AWS: Create VPC Endpoint
+    AWS->>AWS: Configure Security Groups
+    AWS->>AWS: Configure Route53 DNS
+
+    EBS->>Kafka: Test Connectivity
+
+    alt Connection successful
+        EBS->>Kafka: Provision Kafka Resources
+        Kafka->>Kafka: Create Topics
+        Kafka->>Kafka: Create Service Account
+        Kafka->>Kafka: Generate API Keys
+        Kafka->>Kafka: Assign RBAC Roles
+
+        EBS->>Dept: Handoff Access Details
+        Dept->>Kafka: Test Connectivity
+        Dept-->>Dept: Ready for Connector Deployment
+    else Connection failed
+        EBS->>EBS: Debug Network Issues
+        EBS->>Kafka: Retest Connectivity
+    end
+
+```mermaid
 flowchart TD
     Start([Department Requests Kafka Access])
 
