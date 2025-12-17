@@ -552,7 +552,7 @@ sequenceDiagram
     Dash->>Dept: 17. Display status (running/failed)
 ```
 
----
+
 
 ### 4.2 Connector Deployment Flow (Self-Service CLI Model)
 
@@ -629,6 +629,7 @@ sequenceDiagram
         EBS->>EBS: Debug Network Issues
         EBS->>Kafka: Retest Connectivity
     end
+```
 
 ```mermaid
 flowchart TD
